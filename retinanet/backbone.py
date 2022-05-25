@@ -3,7 +3,7 @@
 from typing import *
 
 from torch import Tensor, nn
-from torchvision.models.utils import load_state_dict_from_url
+from torch.hub import load_state_dict_from_url
 
 __all__ = ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]
 
@@ -338,7 +338,13 @@ loaders = {
 
 
 class BackBone(nn.Module):
-    def __init__(self, kind: str = "resnet18", pretrained: bool = True, freeze_bn: bool = True, **kwargs):
+    def __init__(
+        self,
+        kind: str = "resnet18",
+        pretrained: bool = True,
+        freeze_bn: bool = True,
+        **kwargs
+    ):
         """Create a Backbone from `kind`"""
         super(BackBone, self).__init__()
         build_fn = loaders[kind]
